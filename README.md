@@ -1,4 +1,5 @@
 # vue-app
+Vue.js 입문 책에 나온 To-do 앱을 만들어본다.
 
 ## Project setup
 ```
