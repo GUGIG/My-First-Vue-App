@@ -1,12 +1,60 @@
 <template>
-    <div>list</div>
+    <section>
+        <!-- ul>li{할 일 $}*4 -->
+        <ul>
+            <li v-for="(todoItem, index) in propsdata" :key="todoItem" class="shadow">
+                <i class="checkBtn fa fa-check" aria-hidden="true"></i>
+                {{ todoItem }}
+                <span
+                    class="removeBtn"
+                    type="button"
+                    @click="removeTodo(todoItem, index)"
+                >
+                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                </span>
+            </li>
+        </ul>
+    </section>
 </template>
 
 <script>
 export default {
-    
+    props: ['propsdata'], // 얘는 data옵션처럼 함수로 선언 안해도 되는거야...?
+    methods: {
+        removeTodo: function(todoItem, index) {
+            // localStorage.removeItem(todoItem);
+            // this.propsdata.splice(index, 1); 만약 이벤트 활성 대신 얘를 썼어도 정상작동할까?
+            this.$emit('removeTodo', todoItem, index);
+        }
+    }
 };
 </script>
 
 <style>
+/* 얘는 왜 scope를 안할까..? 일단 이해 안되는건 얘는 scoped하면 작동 안함.*/
+ul {
+    list-style-type: none;
+    padding-left: 0px;
+    margin-top: 0;
+    text-align: left;
+}
+li {
+    display: flex;
+    min-height: 50px;
+    height: 50px;
+    line-height: 50px;
+    margin: 0.5rem 0;
+    padding: 0 0.9rem;
+    background: white;
+    border-radius: 5px;
+}
+.checkBtn {
+    line-height: 45px;
+    color: #62acde;
+    margin-right: 5px;
+}
+.removeBtn {
+    margin-left: auto;
+    color: #de4343;
+}
 </style>
