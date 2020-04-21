@@ -32,7 +32,4 @@ export default {
     height: 50px;
     margin: auto;
 }
-.clearAllBtn:focus {
-    outline: none;
-}
 </style>

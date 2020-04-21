@@ -1,5 +1,8 @@
 <template>
     <div class="inputBox shadow">
+        <!-- <div>
+            {{ newTodoItem }}
+        </div>-->
         <input
             type="text"
             v-model="newTodoItem"
@@ -14,14 +17,26 @@
             <i class="addBtn fa fa-plus" aria-hidden="true"></i>
             <!-- using awesome icon -->
         </button>
+
+        <Modal v-if="showModal" @close="showModal = false" class="modal">
+            <h3 slot="header">경고</h3>
+            <div slot="body"></div> <!--defalut body 메세지 안띄우려고 빈 div태그에 slot 넣음. -->
+            <span slot="footer" @click="showModal = false">
+                할 일을 입력하세요!
+                <i class="closeModalBtn fa fa-times" aria-hidden="true"></i>
+            </span>
+        </Modal>
     </div>
 </template>
 
 <script>
+import Modal from "./common/Modal.vue";
+
 export default {
     data() {
         return {
-            newTodoItem: ""
+            newTodoItem: "",
+            showModal: false
         };
     },
     methods: {
@@ -29,13 +44,19 @@ export default {
             if (this.newTodoItem !== "") {
                 // 값이 있을 때만 밑의 로직 실행
                 var value = this.newTodoItem && this.newTodoItem.trim(); // 뭔데 이거;;
-                this.$emit('addTodo', value);
+                this.$emit("addTodo", value);
                 this.clearInput();
+            } else {
+                // alert("값을 입력하세요!");
+                this.showModal = !this.showModal;
             }
         },
         clearInput: function() {
             this.newTodoItem = "";
         }
+    },
+    components: {
+        Modal: Modal
     }
 };
 </script>
