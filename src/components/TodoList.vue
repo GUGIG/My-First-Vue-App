@@ -68,7 +68,7 @@ li {
 }
 .list-leave-active { /* li 하나 없어질 때 바뀌어야할 style & delay time */
     /* transition: opacity .3s, transform .5s; */
-    transition: background-color .2s, transform .4s;
+    transition: transform .4s ease .3s, background-color .2s ease;
 }
 .list-enter-active { /* li 추가될 때 바뀌어야할 style & delay time */
     transition: transform .3s;
